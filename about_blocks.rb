@@ -34,7 +34,7 @@ class AboutBlocks < Neo::Koan
     yield(:peanut)
     yield(:butter)
     yield(:and)
-    yield(:jelly)
+    
   end
 
   def test_methods_can_call_yield_many_times
