@@ -31,7 +31,10 @@ class AboutBlocks < Neo::Koan
   # ------------------------------------------------------------------
 
   def many_yields
-    
+    yield(:peanut)
+    yield(:butter)
+    yield(:and)
+    yield(:jelly)
     
   end
 
