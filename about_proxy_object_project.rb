@@ -13,11 +13,26 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # of the Proxy class is given in the AboutProxyObjectProject koan.
 
 class Proxy
+  attr_reader :messages
   def initialize(target_object)
     @object = target_object
     # ADD MORE CODE HERE
+    @messages = []
+  end
+  
+  def method_missing(method_name, *args, &block)
+    @messages << method_name
+    @object.send method_name, *args, &block
   end
 
+  def called?(method_name)
+    @messages.include? method_name
+  end
+
+  def number_of_times_called(method_name)
+    @messages.find_all { |m| m === method_name }.count
+  end
+  
   # WRITE CODE HERE
 end
 
@@ -115,7 +130,7 @@ class Television
   end
 end
 
-# Tests for the Television class.  All of theses tests should pass.
+# Tests for the Television class.  All of theses tests should pass
 class TelevisionTest < Neo::Koan
   def test_it_turns_on
     tv = Television.new
